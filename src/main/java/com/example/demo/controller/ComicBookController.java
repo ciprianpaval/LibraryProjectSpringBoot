@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.Dto.BookDto;
-import com.example.demo.Dto.ComicBookDto;
+import com.example.demo.dto.ComicBookDto;
 import com.example.demo.model.ComicBook;
 import com.example.demo.service.ComicBookService;
 import javassist.NotFoundException;
