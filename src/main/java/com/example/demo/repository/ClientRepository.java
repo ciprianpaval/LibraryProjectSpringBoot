@@ -14,5 +14,7 @@ public interface ClientRepository extends JpaRepository<Client,Integer> {
     public List<Client> findClientByLastName(@Param("lastname")String lastname);
     @Query("select c from Client c where c.email=:email")
     public List<Client> findClientByEmail(@Param("email")String email);
+    @Query("select c from Client c order by c.firstname")
+    public List<Client> sortByName();
 
 }

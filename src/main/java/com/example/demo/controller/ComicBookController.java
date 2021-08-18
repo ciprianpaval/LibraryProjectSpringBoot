@@ -87,4 +87,14 @@ public class ComicBookController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/sortByserie")
+    public ResponseEntity sortBySerie(){
+        try {
+            return ResponseEntity.ok(ComicbookService.sortBySerie());
+        }
+        catch (NotFoundException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

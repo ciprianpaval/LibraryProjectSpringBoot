@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Book;
 import com.example.demo.model.ComicBook;
 import com.example.demo.repository.ComicBookRepository;
 import javassist.NotFoundException;
@@ -75,5 +74,16 @@ public class ComicBookService {
     public void deletebyseries(String series)
     {
         comicBookRepository.deleteBookBySeries(series);
+    }
+    public List<ComicBook> sortBySerie() throws NotFoundException{
+        List<ComicBook> comicBooks = comicBookRepository.sortBySerie().stream().toList();
+        if(comicBooks.isEmpty())
+        {
+            throw new NotFoundException("404");
+        }
+        else
+        {
+            return comicBooks;
+        }
     }
 }

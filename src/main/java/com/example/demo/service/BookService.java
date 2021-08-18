@@ -74,4 +74,27 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    public List<Book> sortTitle() throws NotFoundException{
+        List<Book> books = bookRepository.findBookBySortTitle().stream().toList();
+        if(books.isEmpty())
+        {
+            throw new NotFoundException("404");
+        }
+        else
+        {
+            return books;
+        }
+    }
+    public List<Book> sortAuthor() throws NotFoundException{
+        List<Book> books = bookRepository.findBookBySortAuthor().stream().toList();
+        if(books.isEmpty())
+        {
+            throw new NotFoundException("404");
+        }
+        else
+        {
+            return books;
+        }
+    }
+
 }

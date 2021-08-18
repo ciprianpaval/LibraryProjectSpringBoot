@@ -85,5 +85,15 @@ public class ClientController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/clientsortByName")
+    public ResponseEntity sortByname(){
+        try {
+            return ResponseEntity.ok(clientService.sortName());
+        }
+        catch (NotFoundException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

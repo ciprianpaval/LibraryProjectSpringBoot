@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Book;
 import com.example.demo.model.Client;
 import com.example.demo.repository.ClientRepository;
 import javassist.NotFoundException;
@@ -84,5 +85,17 @@ public class ClientService {
     }
     public void deleteById(Integer id){
         clientRepository.deleteById(id);
+    }
+
+    public List<Client> sortName() throws NotFoundException{
+        List<Client> client = clientRepository.sortByName().stream().toList();
+        if(client.isEmpty())
+        {
+            throw new NotFoundException("404");
+        }
+        else
+        {
+            return client;
+        }
     }
 }

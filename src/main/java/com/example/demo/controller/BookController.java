@@ -77,6 +77,26 @@ public class BookController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("sortbooksByTitle")
+    public ResponseEntity sortTitle(){
+        try {
+            return ResponseEntity.ok(bookService.sortTitle());
+        }
+        catch (NotFoundException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("sortbooksByAuthor")
+    public ResponseEntity sortAuthor(){
+        try {
+            return ResponseEntity.ok(bookService.sortAuthor());
+        }
+        catch (NotFoundException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 
 

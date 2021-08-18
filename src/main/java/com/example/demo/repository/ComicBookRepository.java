@@ -20,4 +20,6 @@ public interface ComicBookRepository extends JpaRepository<ComicBook,Integer> {
     @Modifying
     @Query("delete  from ComicBook cb where cb.series =:series")
     public  void deleteBookBySeries(@Param("series")String series);
+    @Query("select cb from ComicBook cb order by cb.series,cb.number")
+    public List<ComicBook> sortBySerie();
 }
