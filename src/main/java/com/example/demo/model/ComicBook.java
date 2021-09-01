@@ -2,9 +2,10 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name="comicbook")
+@Table(name="comicbooks")
 public class ComicBook {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

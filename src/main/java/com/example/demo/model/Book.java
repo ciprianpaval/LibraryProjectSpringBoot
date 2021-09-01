@@ -2,9 +2,10 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name="book")
+@Table(name="books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +15,7 @@ public class Book {
     private String title;
     @Column(name="author")
     private String author;
+
 
     public Book() {
     }
@@ -48,12 +50,12 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id.equals(book.id);
+        return Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, title, author);
     }
 
     @Override

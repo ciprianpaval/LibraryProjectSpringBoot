@@ -2,9 +2,10 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name="client")
+@Table(name="clients")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,7 +18,18 @@ public class Client {
     @Column(name="Email")
     private String email;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "client")
+    private Set<Rental> rentals;
+
     public Client() {
+    }
+
+    public Set<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(Set<Rental> rentals) {
+        this.rentals = rentals;
     }
 
     public Client(Integer id, String firstname, String lastname, String email) {
@@ -61,12 +73,12 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return Objects.equals(id, client.id) && Objects.equals(firstname, client.firstname) && Objects.equals(lastname, client.lastname) && Objects.equals(email, client.email);
+        return Objects.equals(id, client.id) && Objects.equals(firstname, client.firstname) && Objects.equals(lastname, client.lastname) && Objects.equals(email, client.email) && Objects.equals(rentals, client.rentals);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, email);
+        return Objects.hash(id, firstname, lastname, email, rentals);
     }
 
     @Override
@@ -76,6 +88,7 @@ public class Client {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
+                ", rentals=" + rentals +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.ClientDto;
+import com.example.demo.dto.RentInfo;
 import com.example.demo.model.Client;
 import com.example.demo.service.ClientService;
 import javassist.NotFoundException;
@@ -95,5 +96,16 @@ public class ClientController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/rent/{clientId}")
+    public ResponseEntity rentBook(@PathVariable Integer clientId, @RequestBody RentInfo info){
+        try{
+            return ResponseEntity.ok(clientService.rentabook(info.getBookTitle(),clientId,info.getRent_date(), info.getReturn_date()));
+        }
+        catch (NotFoundException e)
+        {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }

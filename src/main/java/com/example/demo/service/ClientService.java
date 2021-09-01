@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.model.Book;
 import com.example.demo.model.Client;
+import com.example.demo.model.Rental;
 import com.example.demo.repository.ClientRepository;
+import com.example.demo.repository.RentalRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,11 @@ import java.util.List;
 public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private BookService bookService;
+    @Autowired
+    private RentalRepository rentalRepository;
+
     public void insert(Client client){
         clientRepository.save(client);
     }
@@ -98,4 +105,20 @@ public class ClientService {
             return client;
         }
     }
+    public boolean rentabook(String title, Integer idClient,String rented_date, String returned_date) throws NotFoundException {
+        try {
+            List<Book> books = bookService.getTitle(title);
+            Book book = books.get(0);
+            bookService.deletebyid(book.getId());
+            Rental rental = new Rental(rented_date,returned_date, book.getId(),clientRepository.getById(idClient));
+            rentalRepository.save(rental);
+            return true;
+
+        }
+        catch (NotFoundException e)
+        {
+            throw new NotFoundException("404");
+        }
+    }
+
 }
